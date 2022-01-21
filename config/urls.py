@@ -22,3 +22,5 @@ urlpatterns = [
    path('accounts/', include('allauth.urls')),   #追加
    path('', include('posts.urls')), 
 ]
+
+print('test')
