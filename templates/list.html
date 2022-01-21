@@ -9,6 +9,7 @@
   <div class="alert alert-success" role="alert">
     #詳細ページへのリンク設定
     <p>タイトル：<a href="{% url 'detail' item.pk %}">{{item.title}}</a></p>
+    <p>投稿：{{item.content}}</a></p>
     <p>投稿者：{{item.user.username}}</p>
     #追加
     {% if request.user in item.like.all %}

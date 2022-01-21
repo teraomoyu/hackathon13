@@ -11,9 +11,9 @@
     <p>コメント：{{object.content}}</p>
 
     {% if object.user == request.user %}　
-    <a href="{% url 'update' pk %}" class="btn btn-primary ms-3" tabindex="-1" role="button" aria-disabled="true">編集</a>
+    <a href="{% url 'update' object.pk %}" class="btn btn-primary ms-3" tabindex="-1" role="button" aria-disabled="true">編集</a>
     #以下追加
-    <a href="{% url 'delete' pk %}" class="btn btn-danger ms-3" tabindex="-1" role="button" aria-disabled="true">削除</a>
+    <a href="{% url 'delete' object.pk %}" class="btn btn-danger ms-3" tabindex="-1" role="button" aria-disabled="true">削除</a>
     {% endif %}
     #追加
     {% if request.user in object.like.all %}
