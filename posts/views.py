@@ -21,7 +21,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
-from .models import Post, Connection
+from .models import Post, Connection, Comment
 
 from .models import Post
 
@@ -62,6 +62,15 @@ class CreatePost(LoginRequiredMixin, CreateView):
        """投稿ユーザーをリクエストユーザーと紐付け"""
        form.instance.user = self.request.user
        return super().form_valid(form)
+    
+   def profile(self):
+        if self.request.method == 'POST':
+            content = self.request.POST['content']
+            profile_content = Post(content = content)
+            profile_content.save()
+            
+            return render(self.request, "example.html")
+
 
 
 
