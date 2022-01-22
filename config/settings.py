@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'techshare.apps.TechshareConfig', #追加
-    'debug_toolbar'
+    'debug_toolbar',#追加
+    'django_bootstrap5',#追加
 ]
 
 MIDDLEWARE = [
