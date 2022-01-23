@@ -8,7 +8,14 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- <h1>test</h1> -->
+  <a href="{% url 'signup'%}">signup</a>
+  <br>
+  <a href="{% url 'home'%}">ホーム</a>
+  <br>
+  <a href="{% url 'bookmark'%}">ブックマーク</a>
+  <br>
+  <a href="{% url 'mypost'%}">自分の投稿</a>
+
   {% block content %}
   {% endblock content %}
 </body>
