@@ -57,7 +57,7 @@ class VideoContent(models.Model):
     upload_date = models.DateTimeField()
     original_name = models.CharField(max_length=200)
     filename = models.CharField(max_length=200, default="")
-    #thumb_frame = models.IntegerField(default=0)
+    thumb_frame = models.IntegerField(default=0)
 
 class VideoTagName(models.Model):
     name = models.CharField(max_length=200, default="")

@@ -13,13 +13,11 @@
 <form action="{% url 'video:update' content.id %}" method="post">
   {% csrf_token %}
   <table border="0">
-    <!--
     <tr><td>thumb:</td>
     <td>
     <img id="thumb" src="{% url 'video:thumb' content.id content.thumb_frame %}">
     <input name="frame" id="thumb_frame" type="range" style="width:500px" min="0" max="{{ video_info.max_frame }}" step="1" value="{{ content.thumb_frame }}">
     <span id="current_thumb_frame">{{ content.thumb_frame }} </span><br>
-    -->
     </td>
     </tr><tr><td>title:</td>
     <td>

@@ -23,7 +23,7 @@
   <br>
   {% for item in contents %}
     <div class="content">
-      <!--<a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><img src="/media/video/{{ item.id }}/thumb.jpg"></a>-->
+      <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><img src="/media/video/{{ item.id }}/thumb.jpg"></a>
       <div class="detail">
         <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><h4>{{ item.title }}</h4></a>
         <br>
