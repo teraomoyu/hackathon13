@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'techshare.apps.TechshareConfig', #追加
     'debug_toolbar',#追加
     'django_bootstrap5',#追加
+    'pynput'  # 追加
 ]
 
 MIDDLEWARE = [

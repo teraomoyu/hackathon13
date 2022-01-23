@@ -1,6 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
 {% block title %}ホーム{% endblock %}
 
 {% block content %}
-<h1>ホーム</h1>
-<p>{{ user.username }}さんようこそ。</p>
+<div class="container">
+    <div class="alert alert-success" role="alert">
+        {% for list in object_list %}
+            <p>投稿者：{{list.user}}</p>
+            <p>投稿内容：{{list.content}}</p>
+            <p>動画：</p>
+            <video id="video_content" controls>
+                <source src="/media/uploads/{{ list.file }} " type="video/mp4">
+                動画の再生にはHTML5が必要です。
+            </video>
+            <a href="{% url 'detail' list.pk %}">詳細</a>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

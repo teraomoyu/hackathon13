@@ -20,4 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('_debug_/',include('debug_toolbar.urls')),
     path('', include('techshare.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
