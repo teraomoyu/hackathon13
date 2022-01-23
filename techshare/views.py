@@ -1,12 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView,CreateView
-from django.http.response import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 
 from .models import Post
 from .forms import SignUpForm
 
+
+def index(request):
+    return render(request, 'video/index.html')
 
 class SignUpView(CreateView):
     form_class = SignUpForm
