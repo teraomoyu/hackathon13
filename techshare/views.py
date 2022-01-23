@@ -134,9 +134,10 @@ def delete_video(content_id, video_filename):
     storage = FileSystemStorage()
     storage.location = DATA_DIR
     storage.delete(str(content_id) + '/' + video_filename)
-    storage.delete(str(content_id) + '/' + 'thumb.jpg')
+    #storage.delete(str(content_id) + '/' + 'thumb.jpg')
     storage.delete(str(content_id) + '/')
 
+'''
 def make_video_thumb(src_filename, capture_frame, dst_filename=None):
     probe = ffmpeg.probe(src_filename)
     video_info = next(x for x in probe['streams'] if x['codec_type'] == 'video')
@@ -158,6 +159,7 @@ def make_video_thumb(src_filename, capture_frame, dst_filename=None):
     )
 
     return im
+'''
 
 class VideoUploadForm(forms.Form):
     file = forms.FileField()
@@ -176,7 +178,7 @@ class UploadView(generic.FormView):
             storage = FileSystemStorage()
             storage.location = DATA_DIR + str(content.id)
             filename = storage.save(upload_filename, form.cleaned_data["file"])
-            make_video_thumb(DATA_DIR + str(content.id) + "/" + filename, content.thumb_frame, DATA_DIR + str(content.id) + "/thumb.jpg")
+            #make_video_thumb(DATA_DIR + str(content.id) + "/" + filename, content.thumb_frame, DATA_DIR + str(content.id) + "/thumb.jpg")
 
         except:
             delete_video(content.id, filename)
@@ -199,20 +201,21 @@ def edit(request, content_id):
     tags = VideoTagList.objects.filter(content_id=content_id).select_related('content')
 
     return render(request, 'video/edit.html', {'content':content, 'video_info':info, 'tags':tags})
-
+'''
 def thumb(request, content_id, frame):
     content = get_object_or_404(VideoContent, pk=content_id)
     im = make_video_thumb(DATA_DIR + str(content.id) + "/" + content.filename, frame)
     return HttpResponse(im, content_type="image/jpeg")
+'''
 
 def update(request, content_id):
     content = get_object_or_404(VideoContent, pk=content_id)
     content.title = request.POST['title']
-    content.thumb_frame = request.POST['frame']
+    #content.thumb_frame = request.POST['frame']
     content.description = request.POST['desc']
     content.save()
 
-    make_video_thumb(DATA_DIR + str(content.id) + "/" + content.filename, content.thumb_frame, DATA_DIR + str(content.id) + "/thumb.jpg")
+    #make_video_thumb(DATA_DIR + str(content.id) + "/" + content.filename, content.thumb_frame, DATA_DIR + str(content.id) + "/thumb.jpg")
 
     return HttpResponseRedirect(reverse('video:index'))
 

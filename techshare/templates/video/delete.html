@@ -6,7 +6,9 @@
 
 <form method="post">
   {% csrf_token %}
+  <!--
   <img src="/media/video/{{ object.id }}/thumb.jpg"><br>
+  -->
   {{ object.title }}を削除します。<br><br>
   <input type="submit" value="削除">
 </form>
