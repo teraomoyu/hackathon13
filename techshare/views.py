@@ -5,13 +5,12 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 
 from .models import Post
-from .forms import SignUpForm,LoginForm,PostForm,CommentForm
+from .forms import SignUpForm
 
 
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'signup.html'
-    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         user = form.save()  # フォームの内容を保存
@@ -55,9 +54,9 @@ class Home(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Post.objects.exclude(user=self.request.user)
 
-class DetailPost(LoginRequiredMixin, DetailView):
-    model = Post
-    template_name = 'detail.html'
+#class DetailPost(LoginRequiredMixin, DetailView):
+ #   model = Post
+  #  template_name = 'detail.html'
 
 
 # Create your views here.
