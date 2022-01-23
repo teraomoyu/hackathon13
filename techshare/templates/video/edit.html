@@ -1,0 +1,55 @@
+{% extends "video/base.html" %}
+
+{% block header %}
+{% load static %}
+  <script src="{% static 'video/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'video/edit.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<h2>編集中: {{ content.id }} - {{ content.title }}</h2>
+
+<h3>VIDEO</h3>
+<form action="{% url 'video:update' content.id %}" method="post">
+  {% csrf_token %}
+  <table border="0">
+    <tr><td>thumb:</td>
+    <td>
+    <img id="thumb" src="{% url 'video:thumb' content.id content.thumb_frame %}">
+    <input name="frame" id="thumb_frame" type="range" style="width:500px" min="0" max="{{ video_info.max_frame }}" step="1" value="{{ content.thumb_frame }}">
+    <span id="current_thumb_frame">{{ content.thumb_frame }} </span><br>
+    </td>
+    </tr><tr><td>title:</td>
+    <td>
+    <input name="title" type="text" size="100" value="{{ content.title }}"><br>
+    </td>
+    </tr><tr><td>description:</td>
+    <td>
+    <textarea name="desc" rows="5" cols="100">{{ content.description }}</textarea>
+    </td>
+    </tr>
+  </table>
+  <br>
+  <input type="submit" value="決定">
+</form>
+<br>
+
+<hr>
+
+<h3>TAG</h3>
+<form action="{% url 'video:update_add_tag' content.id %}" method="post">
+  <table border="0">
+  {% for tag in tags %}
+    <tr><td>{{ tag.tag.name }}</td><td><input type="submit" value="削除" formaction="{% url 'video:update_remove_tag' content.id tag.tag.name %}"></td></tr>
+  {% endfor %}
+  </table>
+  <input type="text" name="tag" value="">
+  <input type="submit" value="追加">
+  {% csrf_token %}
+</form>
+<br>
+<hr>
+
+<a href="{% url 'video:delete' content.id %}">削除する</a>
+<br>
+{% endblock %}
