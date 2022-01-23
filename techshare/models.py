@@ -11,8 +11,8 @@ class Post(models.Model):
    file = models.FileField(null=True,blank=True,upload_to="uploads/")
    #like追加
    like = models.ManyToManyField(User, related_name='related_post', blank=True)
-   created_at = models.DateTimeField(auto_now_add=True)
-   updated_at = models.DateTimeField(auto_now=True)
+#    created_at = models.DateTimeField(auto_now_add=True)
+#    updated_at = models.DateTimeField(auto_now=True)
 
 #    def __str__(self):
 #        return self.title

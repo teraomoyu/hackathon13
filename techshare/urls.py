@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, Home
+from .views import SignUpView, Home, DetailView, BookmarkView, MyPostView,login,logout
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,7 +24,10 @@ urlpatterns = [
     path('update/tag/<int:content_id>', views.update_add_tag, name='update_add_tag'),
     path('update/tag/<int:content_id>/<str:tag_name>', views.update_remove_tag, name='update_remove_tag'),
     path('signup/', SignUpView.as_view(), name='signup'),
-    path('', views.index, name='index'), # add
+    path('login/',login,name='login'),
+    path('logout/',logout,name='logout'),
+    path('bookmark/', BookmarkView.as_view(), name="bookmark"),
+    path('mypost/', MyPostView.as_view(), name="mypost"),
     path('', Home.as_view(), name='home')
 ]
 

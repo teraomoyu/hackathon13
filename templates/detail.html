@@ -7,7 +7,30 @@
 <div class="container">
   <div class="alert alert-success" role="alert">
     <p>投稿者：{{object.user}}</p>
-    <p>コメント：{{object.content}}</p>
+    <p>投稿内容：{{object.content}}</p>
+    <p>動画：</p>
+      <video id="video_content" src="/media/uploads/{{ list.file }}" controls>
+          動画の再生にはHTML5が必要です。
+      </video>
   </div>
+  <br>
+  <h1>投稿に対するコメント</h1>
+  <div class="alert alert-success" role="alert">
+    {% for list in comments %}
+      <p>コメントの投稿者：{{list.user}}</p>
+      <p>コメント：{{list.comment_content}}</p>
+    {% endfor %}
+  </div>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        {{ field.label }}
+        {{ field }}
+        {{ field.errors }}
+        <br>
+    {% endfor %}
+    <button type="submit">送信</button>
+  </form>
 </div>
 {% endblock content %}
