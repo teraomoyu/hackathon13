@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',#追加
     'django_bootstrap5',#追加
     'pynput'  # 追加
+    'mediavideo',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +75,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Media directory
+MEDIA_ROOT = '/storage/'
+MEDIA_URL = '/media/'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

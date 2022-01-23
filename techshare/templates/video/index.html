@@ -1,0 +1,70 @@
+{% extends "video/base.html" %}
+
+{% block main %}
+
+<div class="left">
+  <br>
+  <a href="./upload/">Upload Video</a>
+  <br><br>
+  <h4>関連タグ</h4>
+  <ul class="taglist">
+  {% for item in tags %}
+    <li><a href="{% comment %}{% url 'video:tag' item.name %}{% endcomment %}">{{ item.name }}</a> ({{ item.count }})</li>
+  {% endfor %}
+  </ul>
+</div>
+
+<div class="center">
+  <form action="{% comment %}{% url 'video:search' %}{% endcomment %}" method="post">
+    {% csrf_token %}
+    <input name="search_text" type="text" size="50" value="">
+    <input type="submit" value="検索">
+  </form>
+  <br>
+  {% for item in contents %}
+    <div class="content">
+      <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><img src="/media/video/{{ item.id }}/thumb.jpg"></a>
+      <div class="detail">
+        <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><h4>{{ item.title }}</h4></a>
+        <br>
+        {% for tag in item.tags %}
+          <a href="{% comment %}{% url 'video:tag' tag.tag.name %}{% endcomment %}">{{ tag.tag.name }}</a>
+        {% endfor %}
+        <br>
+        <br>
+        <a href="{% comment %}{% url 'video:edit' item.id %}{% endcomment %}">Edit</a>
+      </div>
+    </div>
+    {% endfor %}
+
+  <br>
+
+  {% if page.word != '' %}
+    <a href="{% url page.type page.word 0 %}">最初</a>/
+  {% else %}
+    <a href="{% url page.type 0 %}">最初</a>/
+  {% endif %}
+
+  {% for item in page.list %}
+    {% if item.valid %}
+      {% if item.num == page.current %}
+        <b>{{ page.current }}</b>/
+      {% else %}
+        {% if page.word != '' %}
+          <a href="{% url page.type page.word item.num %}">{{ item.num }}</a>/
+        {% else %}
+          <a href="{% url page.type item.num %}">{{ item.num }}</a>/
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if page.word != '' %}
+    <a href="{% url page.type page.word page.max %}">最後</a><br>
+  {% else %}
+     <a href="{% url page.type page.max %}">最後</a><br>
+  {% endif %}
+  <br><br>
+</div>
+
+{% endblock %}

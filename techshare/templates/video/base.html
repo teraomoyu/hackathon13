@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
+  <meta http-equiv="Pragma" Content="no-cache">
+  <meta http-equiv="Cache-Control" Content="no-cache">
+  <title>{% block title %}Video Manager{% endblock %}</title>
+{% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'video/main.css' %}">
+{% block header %}{% endblock %}
+</head>
+<body>
+
+<h1><a href="{% url 'video:index' %}">Video Service</a></h1>
+{% block main %}
+
+{% endblock %}
+</body>
+</html>
